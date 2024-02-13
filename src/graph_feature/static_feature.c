@@ -1,5 +1,10 @@
 #include "include/static_feature.h"
 
+/**
+ * This function can/should be optimized, only needs to write four rectangles.
+ * @param
+ * @return
+ */
 canvas boarder_lines(canvas the_canvas, int width, int offset, pixel color) {
   for(int i = offset; i < the_canvas.height - offset; i++) {
     for(int j = offset; j < the_canvas.width - offset; j++) {
