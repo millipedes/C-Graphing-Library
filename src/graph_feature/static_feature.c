@@ -1,5 +1,17 @@
 #include "include/static_feature.h"
 
+/**
+ * Oh how I wish there we functional features in C.
+ * N.B. That this is top_left and bottom_right because this will depend on the
+ * space which is represented by the graph, not just centered.
+ * @param
+ * @return
+ */
+canvas axis_lines(canvas the_canvas, vect2 top_left, vect2 bottom_right,
+    pixel color) {
+  return draw_rectangle(the_canvas, top_left, bottom_right, color);
+}
+
 canvas tic_marks(canvas the_canvas, int qty_tic_marks, int height, int width,
     pixel color, axis the_axis) {
   int height_incrementor = the_canvas.height / qty_tic_marks;
@@ -21,15 +33,9 @@ canvas tic_marks(canvas the_canvas, int qty_tic_marks, int height, int width,
 canvas draw_rectangle(canvas the_canvas, vect2 top_left, vect2 bottom_right,
     pixel color) {
   for(int i = top_left.y; i < bottom_right.y; i++) {
-    if(i < 0 || i >= the_canvas.height) {
-      fprintf(stderr, "[DRAW_RECTANGLE]: Warning rectangle out of bounds (y)."
-          "Ignoring\n");
-    } else {
+    if(i > 0 && i < the_canvas.height) {
       for(int j = top_left.x; j < bottom_right.x; j++) {
-        if(j < 0 || j >= the_canvas.height) {
-          fprintf(stderr, "[DRAW_RECTANGLE]: Warning rectangle out of bounds "
-              "(x). Ignoring\n");
-        } else {
+        if(j > 0 && j < the_canvas.height) {
           the_canvas.values[i][j] = color;
         }
       }

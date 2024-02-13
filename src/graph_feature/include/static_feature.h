@@ -13,6 +13,8 @@ typedef enum {
   Y,
 } axis;
 
+canvas axis_lines(canvas the_canvas, vect2 top_left, vect2 bottom_right,
+    pixel color);
 canvas tic_marks(canvas the_canvas, int qty_tic_marks, int height, int width,
     pixel color, axis the_axis);
 canvas draw_rectangle(canvas the_canvas, vect2 top_left, vect2 bottom_right,
