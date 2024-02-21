@@ -2,10 +2,10 @@
 
 token init_token(int category, void * literal, int line_no) {
   token the_token = calloc(1, sizeof(struct TOKEN_T));
-  if(category == 6) {
+  if(category == 6) { // DOUBLE bad solution need to figure out extern
     the_token->literal = calloc(1, sizeof(double));
     *((double *)(the_token->literal)) = atof(literal);
-  } else if(category == 5) {
+  } else if(category == 5) { // INTEGER bad solution need to figure out extern
     the_token->literal = calloc(1, sizeof(int));
     *((double *)(the_token->literal)) = atoi(literal);
   } else {
