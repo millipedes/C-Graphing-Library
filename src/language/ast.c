@@ -13,7 +13,12 @@ void debug_ast(ast head, int level) {
   PRINT_C_N(' ', level)
   if(head.leaf) {
     printf("[AST] %s ", category_to_string(head.category));
-    printf("%s\n", head.leaf->literal);
+    if(head.leaf->category == 6)
+      printf("%f\n", *((double *)head.leaf->literal));
+    else if(head.leaf->category == 5)
+      printf("%d\n", *((int *)head.leaf->literal));
+    else
+      printf("%s\n", (char *)head.leaf->literal);
   } else {
     printf("[AST] %s\n", internal_node_type_to_string(head.category));
   }

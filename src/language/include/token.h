@@ -10,13 +10,12 @@
 extern char * category_to_string(int category);
 
 typedef struct TOKEN_T {
-  char * literal;
+  void * literal;
   int category;
   int line_no;
 } * token;
 
-token init_token(int category, char * literal, int line_no);
-void debug_token(token the_token);
+token init_token(int category, void * literal, int line_no);
 void free_token(token the_token);
 
 #endif
