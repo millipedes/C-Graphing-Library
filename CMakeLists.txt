@@ -10,8 +10,9 @@ set(SRC_FILES
   ${CMAKE_SOURCE_DIR}/flex/lexer.c
   ${CMAKE_SOURCE_DIR}/bison/parser.tab.c
   ${SRC_DIR}/language/ast.c
-  ${SRC_DIR}/language/token.c
+  ${SRC_DIR}/language/evaluate.c
   ${SRC_DIR}/language/internal_node_type.c
+  ${SRC_DIR}/language/token.c
 )
 
 # Include directories

@@ -4,10 +4,11 @@
 #include "parser.tab.h"
 #include "language/include/ast.h"
 
-#define IS_UNNECESSARY_TOK(t) ((t == LPAR)        \
-                               || (t == RPAR)     \
-                               || (t == COMMENT)  \
-                               || (t == NEWLINE))
+#define IS_UNNECESSARY_TOK(t) ((t == LPAR)         \
+                               || (t == RPAR)      \
+                               || (t == COMMENT)   \
+                               || (t == NEWLINE)   \
+                               || (t == ENDMARKER))
 
 int allocate_ast(int category);
 %}
@@ -44,6 +45,6 @@ int allocate_ast(int category) {
   if(!IS_UNNECESSARY_TOK(category))
     yylval.the_ast = init_ast(init_token(category, yytext, yylineno), category);
   else
-    yylval.the_ast = NULL;
+    yylval.the_ast = init_ast(NULL, -1);
   return category;
 }

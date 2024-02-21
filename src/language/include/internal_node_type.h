@@ -7,6 +7,8 @@ typedef enum {
   IN_EXPRESSION,
   IN_STAR_NEWLINE_EXPR,
   IN_PICK_NEWLINE_EXPR,
+  IN_NEWLINE,
+  IN_ENDMARKER,
   IN_PROGRAM,
 } internal_node_type;
 

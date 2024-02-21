@@ -32,6 +32,7 @@ program
   : star_NEWLINE_expr ENDMARKER {
     $$ = init_ast(NULL, IN_PROGRAM);
     $$ = add_child($$, $1);
+    $2 = init_ast(NULL, IN_ENDMARKER);
     $$ = add_child($$, $2);
     head = $$;
     return ENDMARKER;
@@ -44,7 +45,7 @@ star_NEWLINE_expr
     $$ = add_child($$, $1);
     $$ = add_child($$, $2);
   }
-  | NEWLINE { $$ = NULL; }
+  | NEWLINE { $$ = init_ast(NULL, IN_NEWLINE); }
   ;
 
 pick_NEWLINE_expr
@@ -52,47 +53,48 @@ pick_NEWLINE_expr
     $$ = init_ast(NULL, IN_PICK_NEWLINE_EXPR);
     $$ = add_child($$, $1);
   }
-  | NEWLINE { $$ = NULL; }
+  | NEWLINE { $$ = init_ast(NULL, IN_NEWLINE); }
   ;
 
-expression : DOUBLE
-           | INTEGER
-           | VARIANT
-           | expression PLUS expression {
-             $$ = init_ast(NULL, IN_EXPRESSION);
-             $$ = add_child($$, $1);
-             $$ = add_child($$, $2);
-             $$ = add_child($$, $3);
-           }
-           | expression MINUS expression {
-             $$ = init_ast(NULL, IN_EXPRESSION);
-             $$ = add_child($$, $1);
-             $$ = add_child($$, $2);
-             $$ = add_child($$, $3);
-           }
-           | expression STAR expression {
-             $$ = init_ast(NULL, IN_EXPRESSION);
-             $$ = add_child($$, $1);
-             $$ = add_child($$, $2);
-             $$ = add_child($$, $3);
-           }
-           | expression SLASH expression {
-             $$ = init_ast(NULL, IN_EXPRESSION);
-             $$ = add_child($$, $1);
-             $$ = add_child($$, $2);
-             $$ = add_child($$, $3);
-           }
-           | MINUS expression {
-             $$ = init_ast(NULL, IN_EXPRESSION);
-             $$ = add_child($$, $1);
-             $$ = add_child($$, $2);
-           }
-           | LPAR expression RPAR {
-             $$ = init_ast(NULL, IN_EXPRESSION);
-             $$ = add_child($$, $2);
-           }
-           | COMMENT { $$ = NULL; }
-           ;
+expression
+  : DOUBLE
+  | INTEGER
+  | VARIANT
+  | expression PLUS expression {
+    $$ = init_ast(NULL, IN_EXPRESSION);
+    $$ = add_child($$, $1);
+    $$ = add_child($$, $2);
+    $$ = add_child($$, $3);
+  }
+  | expression MINUS expression {
+    $$ = init_ast(NULL, IN_EXPRESSION);
+    $$ = add_child($$, $1);
+    $$ = add_child($$, $2);
+    $$ = add_child($$, $3);
+  }
+  | expression STAR expression {
+    $$ = init_ast(NULL, IN_EXPRESSION);
+    $$ = add_child($$, $1);
+    $$ = add_child($$, $2);
+    $$ = add_child($$, $3);
+  }
+  | expression SLASH expression {
+    $$ = init_ast(NULL, IN_EXPRESSION);
+    $$ = add_child($$, $1);
+    $$ = add_child($$, $2);
+    $$ = add_child($$, $3);
+  }
+  | MINUS expression {
+    $$ = init_ast(NULL, IN_EXPRESSION);
+    $$ = add_child($$, $1);
+    $$ = add_child($$, $2);
+  }
+  | LPAR expression RPAR {
+    $$ = init_ast(NULL, IN_EXPRESSION);
+    $$ = add_child($$, $2);
+  }
+  | COMMENT { $$ = init_ast(NULL, -1); }
+  ;
 
 %%
 

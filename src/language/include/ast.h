@@ -7,11 +7,11 @@
 #define PRINT_C_N(c, n) for(int zyx = 0;  zyx < n; zyx++) printf("%c", c);
 
 typedef struct AST_T {
-  struct AST_T ** children;
+  struct AST_T * children;
   token leaf;
-  internal_node_type category;
-  int no_children;
-} * ast;
+  int category;
+  int qty_children;
+} ast;
 
 ast init_ast(token the_token, int category);
 void debug_ast(ast head, int level);
